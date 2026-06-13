@@ -1,6 +1,7 @@
 // speechSynth.js
 
 const synth = window.speechSynthesis;
+const savedVoiceKey = 'speechSynthSelectedVoice';
 let voices;
 
 window.addEventListener('DOMContentLoaded', init);
@@ -20,11 +21,17 @@ function populateVoices() {
     option.setAttribute('data-index', voiceSelect.children.length - 1)
     voiceSelect.appendChild(option);
   });
+  restoreSelectedVoice();
 }
 
 function bindListeners() {
   const talkBtn = document.querySelector('#explore > button');
   const textarea = document.querySelector('#explore > textarea');
+  const voiceSelect = document.querySelector('#voice-select');
+
+  voiceSelect.addEventListener('change', () => {
+    localStorage.setItem(savedVoiceKey, voiceSelect.value);
+  });
 
   talkBtn.addEventListener('click', () => {
     let textToSpeak = textarea.value;
@@ -33,6 +40,15 @@ function bindListeners() {
     synth.speak(utterThis);
     openMouth();
   })
+}
+
+function restoreSelectedVoice() {
+  const voiceSelect = document.querySelector('#voice-select');
+  const savedVoice = localStorage.getItem(savedVoiceKey);
+
+  if (savedVoice && [...voiceSelect.options].some(option => option.value === savedVoice)) {
+    voiceSelect.value = savedVoice;
+  }
 }
 
 function getOptionIndex() {

@@ -8,6 +8,16 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <title>Lab 10 - Return of the Party Horn</title>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-632C58ZRJ7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-632C58ZRJ7');
+  </script>
+
   <!-- JS Confetti -->
   <script src="assets/scripts/js-confetti.browser.js"></script>
 
@@ -42,6 +52,18 @@
       <audio class="hidden" src=""></audio>
     </section>
   </main>
+  <script>
+    // Generate a random number between 0 and 1
+    const randomNumber = Math.random();
+    // Determine if the class should be applied
+    const shouldApplyClass = randomNumber < 0.5;
+    // Get the body element
+    let body = document.querySelector('body');
+    // Apply or remove the "blue" class based on the random number
+    if (shouldApplyClass) {
+      body.classList.add('blue');
+    }
+  </script>
 </body>
 
 </html>
